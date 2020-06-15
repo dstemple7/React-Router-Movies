@@ -3,7 +3,6 @@ import axios from 'axios';
 import {Route} from 'react-router-dom'
 import Movie from '../src/Movies/Movie'
 import MovieList from '../src/Movies/MovieList'
-
 import SavedList from './Movies/SavedList';
 
 const App = () => {
@@ -32,11 +31,11 @@ const App = () => {
     <div>
       <SavedList list={savedList} />
       <div>
-        <Route path='/'>
-          <MovieList items={movieList}/>
+        <Route exact path='/'>
+          <MovieList />
         </Route>
-        <Route path='movies/:id'>
-          <Movie items={movieList}/>
+        <Route path='/Movies/:id'>
+          <Movie />
         </Route>
       </div>
     </div>

@@ -1,9 +1,25 @@
-import React from 'react';
+import axios from 'axios'
+import React, {useState, useEffect} from 'react';
 
-const MovieList = props => {
+const MovieList = () => {
+  const [movies, setMovies] = useState([])
+  useEffect(() => {
+    const getMovies = () => {
+      axios
+      .get('http://localhost:5000/api/movies')
+      .then(res => {
+        setMovies(res.data)
+      })
+      .catch(err => {
+        console.error('Server Err', err)
+      })
+    }
+      getMovies()
+  }, [])
+
   return (
     <div className="movie-list">
-      {props.movies.map(movie => (
+      {movies.map(movie => (
         <MovieDetails key={movie.id} movie={movie} />
       ))}
     </div>
@@ -13,7 +29,7 @@ const MovieList = props => {
 function MovieDetails({ movie }) {
   const { title, director, metascore, stars } = movie;
   return (
-    <div className="movie-card">
+      <div className="movie-card">
       <h2>{title}</h2>
       <div className="movie-director">
         Director: <em>{director}</em>
